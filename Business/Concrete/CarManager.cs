@@ -16,10 +16,24 @@ namespace Business.Concrete
             _cardal = cardal;
         }
 
+        public void Add(Car car)
+        {
+            
+        }
+
         public List<Car> GetAll()
         {
             return _cardal.GetAll();
         }
 
+        public List<Car> GetCarsByBrandId(int id)
+        {
+            return _cardal.GetAll(p => p.BrandId == id);
+        }
+
+        public List<Car> GetCarsByColorId(int id)
+        {
+            return _cardal.GetAll(p => p.ColorId == id);
+        }
     }
 }
