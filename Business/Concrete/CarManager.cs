@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.Dtos;
@@ -17,29 +19,51 @@ namespace Business.Concrete
             _cardal = cardal;
         }
 
-        public void Add(Car car)
+        public IResult Add(Car car)
         {
-            
+            if (car.Description.Length < 2)
+            {
+                return new ErrorResult(Messages.DontAdded);
+            }
+            _cardal.Add(car);
+            return new SuccessResult(Messages.Added);
         }
 
-        public List<Car> GetAll()
+        public IDataResult<List<Car>> GetAll()
         {
-            return _cardal.GetAll();
+            return new SuccessDataResult<List<Car>>(_cardal.GetAll(), Messages.Listed);
         }
 
-        public List<CarDetailDto> GetCarDeteails()
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return _cardal.GetCarDetails();
+            return new SuccessDataResult<List<CarDetailDto>>(_cardal.GetCarDetails());
         }
 
-        public List<Car> GetCarsByBrandId(int id)
+        public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
-            return _cardal.GetAll(p => p.BrandId == id);
+            return new SuccessDataResult<List<Car>>(_cardal.GetAll(p => p.BrandId == id));
         }
 
-        public List<Car> GetCarsByColorId(int id)
+        public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
-            return _cardal.GetAll(p => p.ColorId == id);
+            return new SuccessDataResult<List<Car>>(_cardal.GetAll(p => p.ColorId == id));
+        }
+
+        public IDataResult<Car> GetById(int Id)
+        {
+            return new SuccessDataResult<Car>(_cardal.Get(p => p.CarId == Id));
+        }
+
+        public IResult Update(Car car)
+        {
+            _cardal.Update(car);
+            return new SuccessResult(Messages.Updated);
+        }
+
+        public IResult Delete(Car car)
+        {
+            _cardal.Delete(car);
+            return new SuccessResult();
         }
     }
 }
