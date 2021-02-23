@@ -10,10 +10,16 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManagerTest();
+            //CarManagerTest();
             //BrandManagerTest();
             //ColorManagerTest();
             //Data Transformation Object = DTO
+
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            Rental rental = new Rental { CarId = 3, CustomerId = 1, RentDate = DateTime.Now };
+            var result = rentalManager.Add(rental);
+            Console.WriteLine(result.Message + "  " + result.Success);
+
 
         }
 

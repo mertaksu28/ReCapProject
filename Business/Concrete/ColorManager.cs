@@ -34,7 +34,7 @@ namespace Business.Concrete
         {
             if (DateTime.Now.Hour == 23)
             {
-                return new ErrorDataResult<List<Color>>(Messages.DontListed);
+                return new ErrorDataResult<List<Color>>(Messages.DidntList);
             }
             return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages.Listed);
         }

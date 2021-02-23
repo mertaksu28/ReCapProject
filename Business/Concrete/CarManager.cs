@@ -23,7 +23,7 @@ namespace Business.Concrete
         {
             if (car.Description.Length < 2)
             {
-                return new ErrorResult(Messages.DontAdded);
+                return new ErrorResult(Messages.DidntAdd);
             }
             _cardal.Add(car);
             return new SuccessResult(Messages.Added);
