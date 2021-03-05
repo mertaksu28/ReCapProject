@@ -12,7 +12,7 @@ using System.Text;
 
 namespace Business.DependencyResolvers.Autofac
 {
-    public class AutofacBusinessModule:Module
+    public class AutofacBusinessModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -33,6 +33,9 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<RentalManager>().As<IRentalService>().SingleInstance();
             builder.RegisterType<EfRentalDal>().As<IRentalDal>().SingleInstance();
+
+            builder.RegisterType<CarImagesManager>().As<ICarImageService>().SingleInstance();
+            builder.RegisterType<EfCarImageDal>().As<ICarImageDal>().SingleInstance();
 
 
 
