@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Constants
@@ -14,5 +15,6 @@ namespace Business.Constants
         public static string DidntUpdate = "Güncellenemedi";
         public static string Listed = "Listelendi";
         public static string DidntList = "Listelenemedi";
+        public static string AuthorizationDenied = "Yetkiniz Yok";
     }
 }

@@ -8,4 +8,11 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Rentacar Project Github\Business\Business.csproj" />
+    <ProjectReference Include="..\..\..\..\Rentacar Project Github\DataAccess\DataAccess.csproj" />
+    <ProjectReference Include="..\..\..\..\Rentacar Project Github\Entities\Entities.csproj" />
+    <ProjectReference Include="..\..\..\..\Rentacar Project Github\WebAPI\WebAPI.csproj" />
+  </ItemGroup>
+
 </Project>
