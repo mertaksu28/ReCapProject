@@ -32,7 +32,7 @@ namespace Business.Concrete
                 return result;
             }
 
-            carImage.ImagePath = FileHelper.AddAsync(file);
+            carImage.ImagePath = FileHelper.Add(file);
             carImage.Date = DateTime.Now;
             _carImageDal.Add(carImage);
             return new SuccessResult();
@@ -41,7 +41,7 @@ namespace Business.Concrete
         public IResult Delete(CarImage carImage)
         {
             IResult result = BusinessRules.Run(
-                 FileHelper.DeleteAsync(_carImageDal.Get(p => p.Id == carImage.Id).ImagePath));
+                 FileHelper.Delete(_carImageDal.Get(p => p.Id == carImage.Id).ImagePath));
 
             if (result != null)
             {
@@ -63,7 +63,7 @@ namespace Business.Concrete
             var result = _carImageDal.GetAll(c => c.CarId == carId).Count;
             if (result == 0)
             {
-                CarImage carImage = new CarImage { CarId = carId, Date = DateTime.Now, ImagePath = @"C:\Users\MERT\Desktop\Dosyalarım\Engin Hoca\Rent a Car\ReCapProject\Business\Uploads\BMW.jpg" };
+                CarImage carImage = new CarImage { CarId = carId, Date = DateTime.Now, ImagePath = @"\images\default.jpg" };
                 list.Add(carImage);
                 return new SuccessDataResult<List<CarImage>>(list);
             }
@@ -85,7 +85,7 @@ namespace Business.Concrete
             {
                 return result;
             }
-            carImage.ImagePath = FileHelper.UpdateAsync(_carImageDal.Get(p => p.Id == carImage.Id).ImagePath, file);
+            carImage.ImagePath = FileHelper.Update(_carImageDal.Get(p => p.Id == carImage.Id).ImagePath, file);
             carImage.Date = DateTime.Now;
             _carImageDal.Update(carImage);
             return new SuccessResult();

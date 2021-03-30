@@ -3,6 +3,7 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -75,6 +76,11 @@ namespace Business.Concrete
                 return new SuccessResult();
             }
             return new ErrorResult();
+        }
+
+        public IDataResult<List<RentalDetailDto>> GetRentalDetail()
+        {
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetail(), Messages.Listed);
         }
     }
 }
