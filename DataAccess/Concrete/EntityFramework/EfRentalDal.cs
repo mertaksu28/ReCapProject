@@ -33,7 +33,9 @@ namespace DataAccess.Concrete.EntityFramework
                                  LastName = u.LastName,
                                  RentDate = r.RentDate,
                                  ReturnDate = r.ReturnDate,
-                                 CustomerName = cu.CompanyName
+                                 CustomerName = cu.CompanyName,
+                                 CarId = c.Id,
+                                 TotalPrice = 0
                              };
                 return result.ToList();
             }

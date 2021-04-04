@@ -43,14 +43,14 @@ namespace ConsoleUI
 
         private static void CarManagerTest()
         {
-            CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetails().Data)
-            {
+            //CarManager carManager = new CarManager(new EfCarDal());
+            //foreach (var car in carManager.GetCarDetails().Data)
+            //{
 
-                Console.WriteLine(car.BrandName + " : " + car.ColorName + " : " + car.DailyPrice);
-            }
-            var result = carManager.Add(new Car { BrandId = 1, ColorId = 1, DailyPrice = 87665543, ModelYear = "2021", Description = "A" });
-            Console.WriteLine(result.Message + " : " + result.Success);
+            //    Console.WriteLine(car.BrandName + " : " + car.ColorName + " : " + car.DailyPrice);
+            //}
+            //var result = carManager.Add(new Car { BrandId = 1, ColorId = 1, DailyPrice = 87665543, ModelYear = "2021", Description = "A" });
+            //Console.WriteLine(result.Message + " : " + result.Success);
 
             //Console.WriteLine("---------------GetCarsByBrandId-------------------");
 

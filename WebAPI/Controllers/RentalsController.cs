@@ -71,5 +71,13 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+        [HttpGet("checkcar")]
+        public IActionResult CheckCar(int carId)
+        {
+            var result = _rentalService.CheckCar(carId);
+            return Ok(result);
+
+        }
+
     }
 }

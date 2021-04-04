@@ -6,6 +6,7 @@ using Entities.Concrete;
 using Entities.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Business.Concrete
@@ -21,14 +22,6 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            if (CheckCar(rental.CarId).Success)
-            {
-                if (CheckReturnDate(rental.CarId).Success)
-                {
-                    return new ErrorResult(Messages.DidntAdd);
-                }
-            }
-
             _rentalDal.Add(rental);
             return new SuccessResult(Messages.Added);
         }
@@ -55,6 +48,10 @@ namespace Business.Concrete
             return new SuccessResult(Messages.Updated);
         }
 
+        public IDataResult<List<RentalDetailDto>> GetRentalDetail()
+        {
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetail(), Messages.Listed);
+        }
         public IResult CheckCar(int carId)
         {
             var result = _rentalDal.GetAll();
@@ -62,25 +59,37 @@ namespace Business.Concrete
             {
                 if (rental.CarId == carId)
                 {
-                    return new SuccessResult();
+
+                    if (CheckReturnDate(carId).Success)
+                    {
+                        return new SuccessResult("Araç Kiralanabilir");
+
+                    }
+                    return new ErrorResult("Araç Kiralanamaz");
                 }
+
             }
-            return new ErrorResult();
+
+            return new SuccessResult("Araç Kiralanabilir");
+
+
         }
 
-        public IResult CheckReturnDate(int carId)
+        private IResult CheckReturnDate(int carId)
         {
-            var result = _rentalDal.Get(r => r.CarId == carId);
-            if (result.ReturnDate == null)
+
+
+            var result = _rentalDal.GetAll(c => c.CarId == carId).LastOrDefault();
+
+
+            if (result.ReturnDate != null)
             {
                 return new SuccessResult();
             }
+
+
             return new ErrorResult();
         }
 
-        public IDataResult<List<RentalDetailDto>> GetRentalDetail()
-        {
-            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetail(), Messages.Listed);
-        }
     }
 }
